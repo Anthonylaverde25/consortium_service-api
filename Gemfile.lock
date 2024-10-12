@@ -121,7 +121,7 @@ GEM
     ffi (1.17.0-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    i18n (1.14.5)
+    i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     image_processing (1.13.0)
       mini_magick (>= 4.9.5, < 5)
@@ -173,8 +173,8 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.26.3)
-    paranoia (2.6.4)
-      activerecord (>= 5.1, < 7.2)
+    paranoia (3.0.0)
+      activerecord (>= 6, < 8.1)
     parser (3.3.4.2)
       ast (~> 2.4.1)
       racc
@@ -329,7 +329,7 @@ DEPENDENCIES
   dotenv-rails
   image_processing (>= 1.2)
   mysql2 (~> 0.5.6)
-  paranoia (~> 2.4)
+  paranoia (~> 3.0)
   pry
   pry-rails
   puma (>= 5.0)
