@@ -1,0 +1,4 @@
+DB_USERNAME= bdusername
+DB_PASSWORD= dbpassword
+DB_HOST= hostname
+DB_NAME= dbname
