@@ -10,6 +10,12 @@ class EntityEntity
     @deleted_at = attributes[:deleted_at]
   end
 
+
+  # Método para verificar si la entidad es válida
+  def valid?
+    errors.empty? # Retorna true si no hay errores
+  end
+
   def errors
     error_messages = []
 

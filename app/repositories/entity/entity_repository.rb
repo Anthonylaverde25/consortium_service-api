@@ -11,10 +11,13 @@ class EntityRepository
       entity
     end
 
-    if entities.empty?
-      raise ActiveRecord::RecordNotFound, "No entities found in the database."
-    end
+
 
     entities
+  end
+
+  def self.create_entity(entity_entity)
+    entity_active_record = Entity.create!(entity_entity.instance_values.except("deleted_at"))
+    entity_active_record
   end
 end
