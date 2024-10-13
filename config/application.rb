@@ -10,10 +10,26 @@ module MyApi
   class Application < Rails::Application
      # Initialize configuration defaults for originally generated Rails version.
 
-     config.load_defaults 7.1
-     config.autoload_paths += %W[#{config.root}/app/repositories/consortium]
-     config.autoload_paths += %W[#{config.root}/app/domain/usecase/consortium_usecase]
-     config.autoload_paths += %W[#{config.root}/app/domain/entity]
+     #  config.load_defaults 7.1
+     #  config.autoload_paths += %W[#{config.root}/app/repositories/consortium]
+     #  config.autoload_paths += %W[#{config.root}/app/domain/usecase/consortium_usecase]
+     #  config.autoload_paths += %W[#{config.root}/app/domain/usecase/entity_usecase]
+
+
+     #  ## AUTOLOAD ENTITY(ENTIDAD)
+     #  config.autoload_paths += %W[#{config.root}/app/repositories/entity]
+
+
+     #  config.autoload_paths += %W[#{config.root}/app/domain/entity]
+
+     # Agrega los paths para autoloading
+     config.autoload_paths += %W[
+      #{config.root}/app/repositories/consortium
+      #{config.root}/app/domain/usecase/consortium_usecase
+      #{config.root}/app/domain/usecase/entity_usecase
+      #{config.root}/app/repositories/entity
+      #{config.root}/app/domain/entity
+     ]
 
 
 

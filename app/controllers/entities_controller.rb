@@ -3,9 +3,13 @@ class EntitiesController < ApplicationController
 
   # GET /entities
   def index
-    @entities = Entity.all
-
+    use_case = EntityUsecase::FindAllEntities.new
+    @entities = use_case.call
     render json: @entities
+
+  rescue StandardError => e
+    Rails.logger.error("Error retrieving all entities (companies) DESDE EL CONTROLADOR: #{e.message}")
+    render json: { error: "Internal Server Error" }, status: :internal_server_error
   end
 
   # GET /entities/1
