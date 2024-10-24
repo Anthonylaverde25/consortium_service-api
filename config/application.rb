@@ -29,8 +29,12 @@ module MyApi
       #{config.root}/app/domain/usecase/entity_usecase
       #{config.root}/app/repositories/entity
       #{config.root}/app/domain/entity
+
+
      ]
 
+
+     # {config.root}/app/controllers/users/registrations_controller
 
 
 

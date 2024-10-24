@@ -12,7 +12,6 @@ class ConsortiumRepository
   end
 
   def self.create_consortium(consortium_entity)
-    # Consortium.create!(consortium_entity.instance_values)
     consortium = Consortium.create!(consortium_entity.instance_values.except("images"))
     consortium.images.attach(consortium_entity.images) if consortium_entity.images.present?
     consortium

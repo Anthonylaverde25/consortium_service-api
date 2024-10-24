@@ -20,7 +20,7 @@ class EntityUsecase
 
     def call(entity_entity)
       unless entity_entity.valid?
-        raise StandardError.new(entity_entity.errors)
+        raise StandardError.new(entity_entity.errors.join(", "))
       end
 
       @entity_repository.create_entity(entity_entity)

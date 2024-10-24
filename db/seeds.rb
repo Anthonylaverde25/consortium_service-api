@@ -9,7 +9,7 @@ admin_role = Role.find_or_create_by!(name: :admin) do |role|
   role.description = 'Administrator with permissions to manage users and settings.'
 end
 
-user_role = Role.find_or_create_by!(name: :user) do |role|
+employee_role = Role.find_or_create_by!(name: :employee) do |role|
   role.description = 'Regular user with limited access to features.'
 end
 
@@ -27,8 +27,8 @@ super_admin = User.find_or_create_by!(email: 'super_admin@gmail.com') do |user|
   user.lastname = 'super_Admin'
   user.password = '12345678'
   user.password_confirmation = '12345678'
+  user.roles << employee_role # Asignar rol user
   user.roles << super_admin_role
-  user.roles << user_role # Asignar rol user
 end
 
 admin = User.find_or_create_by!(email: 'admin@gmail.com') do |user|
@@ -36,35 +36,54 @@ admin = User.find_or_create_by!(email: 'admin@gmail.com') do |user|
   user.lastname = 'admin'
   user.password = '12345678'
   user.password_confirmation = '12345678'
+  user.roles << employee_role # Asignar rol user
   user.roles << admin_role
-  user.roles << user_role # Asignar rol user
 end
 
-sergio = User.find_or_create_by!(email: 'sergio@gmail.com') do |user|
+sergio_admin = User.find_or_create_by!(email: 'sergio@gmail.com') do |user|
   user.name = 'Sergio'
   user.lastname = 'Cattorini'
   user.password = '12345678'
   user.password_confirmation = '12345678'
-  user.roles << user_role # Solo rol user
+  user.roles << employee_role # Asignar rol user
   user.roles << admin_role
 end
 
-general_manager = User.find_or_create_by!(email: 'laura.wilson@gmail.com') do |user|
+general_manager_1 = User.find_or_create_by!(email: 'laura.wilson@gmail.com') do |user|
   user.name = 'Laura'
   user.lastname = 'Wilson'
   user.password = '12345678'
   user.password_confirmation = '12345678'
+  user.roles << employee_role # Asignar rol user
   user.roles << general_manager_role
-  user.roles << user_role # Asignar rol user
 end
 
-plant_manager = User.find_or_create_by!(email: 'michael.brown@gmail.com') do |user|
+
+general_manager_2 = User.find_or_create_by!(email: 'sonia.cartson@gmail.com') do |user|
+  user.name = 'Sonia'
+  user.lastname = 'Cartson'
+  user.password = '12345678'
+  user.password_confirmation = '12345678'
+  user.roles << employee_role # Asignar rol user
+  user.roles << general_manager_role
+end
+
+plant_manager_1 = User.find_or_create_by!(email: 'michael.brown@gmail.com') do |user|
   user.name = 'Michael'
   user.lastname = 'Brown'
   user.password = '12345678'
   user.password_confirmation = '12345678'
+  user.roles << employee_role # Asignar rol user
   user.roles << plant_manager_role
-  user.roles << user_role # Asignar rol user
+end
+
+plant_manager_2 = User.find_or_create_by!(email: 'gustavo.bolivar@gmail.com') do |user|
+  user.name = 'Gustavo'
+  user.lastname = 'Bolivar'
+  user.password = '12345678'
+  user.password_confirmation = '12345678'
+  user.roles << employee_role # Asignar rol user
+  user.roles << plant_manager_role
 end
 
 # Crear el consorcio si no existe
@@ -84,6 +103,10 @@ consortium = Consortium.find_or_create_by!(name: 'Cattorini Hnos') do |c|
   c.status = :active # Usar el enum para establecer el estado como 'active'
 end
 
+
+
+
+
 # Crear entidades (empresas/sucursales)
 rigolleau = Entity.find_or_create_by!(name: 'Rigolleau') do |e|
   e.email = 'info@rigolleau.com'
@@ -96,3 +119,10 @@ cattorini_hnos_pasco = Entity.find_or_create_by!(name: 'Cattorini Pasco') do |e|
   e.description = 'Leading company in the manufacture and distribution of glass containers'
   e.consortium = consortium
 end
+
+
+EntitiesUser.find_or_create_by!(entity: rigolleau, user: general_manager_1)
+EntitiesUser.find_or_create_by!(entity: rigolleau, user: plant_manager_1)
+
+EntitiesUser.find_or_create_by!(entity: cattorini_hnos_pasco, user: general_manager_2)
+EntitiesUser.find_or_create_by!(entity: cattorini_hnos_pasco, user: plant_manager_2)

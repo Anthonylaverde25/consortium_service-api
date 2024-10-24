@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_13_115618) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_23_120202) do
   create_table "active_storage_attachments", charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -70,6 +70,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_13_115618) do
     t.index ["consortium_id"], name: "index_entities_on_consortium_id"
   end
 
+  create_table "entities_users", charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "entity_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_id"], name: "index_entities_users_on_entity_id"
+    t.index ["user_id"], name: "index_entities_users_on_user_id"
+  end
+
   create_table "roles", charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
     t.integer "name"
     t.datetime "created_at", null: false
@@ -113,4 +122,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_13_115618) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "entities", "consortiums"
+  add_foreign_key "entities_users", "entities"
+  add_foreign_key "entities_users", "users"
 end

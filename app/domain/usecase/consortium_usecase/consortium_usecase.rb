@@ -27,12 +27,14 @@ class ConsortiumUsecase
     end
   end
 
+
   class CreateConsortium
     def initialize(consortium_repository = ConsortiumRepository)
       @consortium_repository = consortium_repository
     end
 
-    def call(consortium_entity)
+    def call(consortium_params)
+      consortium_entity = ConsortiumEntity.new(consortium_params)
       begin
         if consortium_entity.valid?
           @consortium_repository.create_consortium(consortium_entity)
@@ -48,12 +50,16 @@ class ConsortiumUsecase
 
 
 
+
+
   class UpdateConsortium
     def initialize(consortium_repository = ConsortiumRepository)
       @consortium_repository = consortium_repository
     end
 
-    def call(consortium_to_update, consortium_entity)
+    def call(consortium_to_update, consortium_params)
+      consortium_entity = ConsortiumEntity.new(consortium_params)
+
       if consortium_entity.nil?
         raise StandardError.new("Consortium not  found")
       end
@@ -66,6 +72,8 @@ class ConsortiumUsecase
       raise
     end
   end
+
+
 
 
 

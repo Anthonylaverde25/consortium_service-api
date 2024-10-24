@@ -19,11 +19,11 @@ class ConsortiumsController < ApplicationController
   end
 
   def create
-    consortium_entity = ConsortiumEntity.new(consortium_params)
     use_case = ConsortiumUsecase::CreateConsortium.new
 
     begin
-      saved_consortium = use_case.call(consortium_entity)
+      saved_consortium = use_case.call(consortium_params)
+
       render json: saved_consortium, status: :created
     rescue StandardError => e
       Rails.logger.error("Error creating consortium: #{e.message}")
@@ -34,11 +34,9 @@ class ConsortiumsController < ApplicationController
 
 
   def update
-    consortium_entity = ConsortiumEntity.new(consortium_params)
-
     use_case = ConsortiumUsecase::UpdateConsortium.new
     begin
-      update_consortium = use_case.call(@consortium, consortium_entity)
+      update_consortium = use_case.call(@consortium, consortium_params)
       render json: Presenter::ConsortiumPresenter.as_json(update_consortium), status: :ok
     rescue StandardError => e
       Rails.logger.error("Error updating consortium: #{e.message}")

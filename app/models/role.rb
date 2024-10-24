@@ -5,7 +5,7 @@ class Role < ApplicationRecord
   enum name: {
     super_admin: 0,
     admin: 1,
-    user: 2,
+    employee: 2,
     general_manager: 3,
     plant_manager: 4
   }
