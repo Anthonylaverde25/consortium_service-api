@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_23_120202) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_25_110901) do
   create_table "active_storage_attachments", charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,6 +60,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_120202) do
     t.index ["deleted_at"], name: "index_consortiums_on_deleted_at"
   end
 
+  create_table "departments", charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "entities", charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -67,7 +73,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_120202) do
     t.bigint "consortium_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "general_manager_id"
     t.index ["consortium_id"], name: "index_entities_on_consortium_id"
+    t.index ["general_manager_id"], name: "index_entities_on_general_manager_id"
   end
 
   create_table "entities_users", charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
@@ -77,6 +85,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_120202) do
     t.datetime "updated_at", null: false
     t.index ["entity_id"], name: "index_entities_users_on_entity_id"
     t.index ["user_id"], name: "index_entities_users_on_user_id"
+  end
+
+  create_table "entity_departments", charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
+    t.bigint "entity_id", null: false
+    t.bigint "department_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_entity_departments_on_department_id"
+    t.index ["entity_id"], name: "index_entity_departments_on_entity_id"
   end
 
   create_table "roles", charset: "utf8mb3", collation: "utf8mb3_general_ci", force: :cascade do |t|
@@ -122,6 +139,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_120202) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "entities", "consortiums"
+  add_foreign_key "entities", "users", column: "general_manager_id"
   add_foreign_key "entities_users", "entities"
   add_foreign_key "entities_users", "users"
+  add_foreign_key "entity_departments", "departments"
+  add_foreign_key "entity_departments", "entities"
 end

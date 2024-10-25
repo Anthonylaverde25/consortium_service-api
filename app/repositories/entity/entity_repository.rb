@@ -20,4 +20,25 @@ class EntityRepository
     entity_active_record = Entity.create!(entity_entity.instance_values.except("deleted_at"))
     entity_active_record
   end
+
+  # def self.update_entity(entity_instance, entity)
+  #   entity.update(entity_instance.instance_values.except("id"))
+  #   entity
+  #   # Actualiza el registro de la entidad y devuelve la entidad actualizada
+  #   # if entity.update(entity_instance.instance_values.except("id"))
+  #   #   entity # Devuelve el objeto actualizado
+  #   # else
+  #   #   false # O maneja el error según tu lógica
+  #   # end
+  # end
+
+  # def self.update_entity(entity_instance, entity)
+  #  entity_updated_record = entity.update!(entity_instance.instance_values.except("id"))
+  #  entity_updated_record
+  # end
+
+  def self.update_entity(entity_instance, entity)
+    entity_updated_record = entity.update!(entity_instance.instance_values.except("id"))
+    { updated: entity_updated_record, entity: entity }
+  end
 end

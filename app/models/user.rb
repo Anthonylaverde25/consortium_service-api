@@ -16,4 +16,7 @@ class User < ActiveRecord::Base
   # through significa que no es necesario mirar directamente la tabla intermedia para acceder a su relacion
   # ejemplo: Juan.entities (acceso a las relaciones)
   has_many :entities, through: :entities_users
+
+
+  has_one :managed_entities, class_name: "Entity", foreign_key: "general_manager_id"
 end

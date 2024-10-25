@@ -58,7 +58,6 @@ general_manager_1 = User.find_or_create_by!(email: 'laura.wilson@gmail.com') do 
   user.roles << general_manager_role
 end
 
-
 general_manager_2 = User.find_or_create_by!(email: 'sonia.cartson@gmail.com') do |user|
   user.name = 'Sonia'
   user.lastname = 'Cartson'
@@ -103,24 +102,37 @@ consortium = Consortium.find_or_create_by!(name: 'Cattorini Hnos') do |c|
   c.status = :active # Usar el enum para establecer el estado como 'active'
 end
 
-
-
-
-
 # Crear entidades (empresas/sucursales)
 rigolleau = Entity.find_or_create_by!(name: 'Rigolleau') do |e|
   e.email = 'info@rigolleau.com'
   e.description = 'Leading company in the manufacture and distribution of glass containers'
   e.consortium = consortium
+  e.general_manager = general_manager_1 # Asignar gerente general
 end
 
 cattorini_hnos_pasco = Entity.find_or_create_by!(name: 'Cattorini Pasco') do |e|
   e.email = 'info@cattorinipasco.com'
   e.description = 'Leading company in the manufacture and distribution of glass containers'
   e.consortium = consortium
+  e.general_manager = general_manager_2 # Asignar gerente general
 end
 
 
+
+hr_department = Department.find_or_create_by!(name: 'HR')
+production_department = Department.find_or_create_by!(name: 'Produccion')
+quality_control_department = Department.find_or_create_by!(name: 'Control de Calidad')
+
+# Asociar departamentos a las entidades
+EntityDepartment.find_or_create_by!(entity: rigolleau, department: hr_department)
+EntityDepartment.find_or_create_by!(entity: rigolleau, department: production_department)
+EntityDepartment.find_or_create_by!(entity: rigolleau, department: quality_control_department)
+
+EntityDepartment.find_or_create_by!(entity: cattorini_hnos_pasco, department: hr_department)
+EntityDepartment.find_or_create_by!(entity: cattorini_hnos_pasco, department: production_department)
+EntityDepartment.find_or_create_by!(entity: cattorini_hnos_pasco, department: quality_control_department)
+
+# Asociar usuarios a las entidades
 EntitiesUser.find_or_create_by!(entity: rigolleau, user: general_manager_1)
 EntitiesUser.find_or_create_by!(entity: rigolleau, user: plant_manager_1)
 

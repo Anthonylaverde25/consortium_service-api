@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   resources :roles
   resources :entities
   resources :consortiums
+  resources :department
 
   get "up" => "rails/health#show", as: :rails_health_check
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker

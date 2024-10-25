@@ -1,5 +1,5 @@
 class EntityEntity
-  attr_accessor :id, :name, :description, :email, :consortium_id, :deleted_at
+  attr_accessor :id, :name, :description, :email, :consortium_id, :general_manager_id # :deleted_at
 
   def initialize(attributes = {})
     @id = attributes[:id] # El id es nil si no se proporciona
@@ -7,7 +7,8 @@ class EntityEntity
     @description = attributes[:description]
     @email = attributes[:email]
     @consortium_id = attributes[:consortium_id]
-    @deleted_at = attributes[:deleted_at]
+    @general_manager_id = attributes[:general_manager_id]
+    # @deleted_at = attributes[:deleted_at]
   end
 
 

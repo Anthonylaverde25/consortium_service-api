@@ -15,7 +15,7 @@ module ErrorHandler
   end
 
   def handle_standard_error(error)
-    Rails.logger.error("Unexpected error: #{error.message} DESDE EL CONTROLADOR")
+    Rails.logger.error("Unexpected error: #{error.message} ")
     messages = error.message.split(", ")
     render json: { message_errors: messages }, status: :internal_server_error
   end
