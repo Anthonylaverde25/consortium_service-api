@@ -1,5 +1,7 @@
 # app/controllers/registrations_controller.rb
 class RegistrationsController < DeviseTokenAuth::RegistrationsController
+  before_action :authenticate_user!  # Asegura que el usuario esté autenticado
+
   def create
     super do |user|
       if user.persisted?

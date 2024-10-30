@@ -1,4 +1,5 @@
 class RolesController < ApplicationController
+  before_action :authenticate_user!  # Asegura que el usuario esté autenticado
   before_action :set_role, only: %i[ show update destroy ]
 
   # GET /roles

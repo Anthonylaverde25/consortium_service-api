@@ -4,6 +4,7 @@
 class EntitiesController < ApplicationController
   include ErrorHandler  # Incluye el módulo de manejo de errores
 
+  before_action :authenticate_user!
   before_action :set_entity, only: %i[show update destroy]
 
   # GET /entities

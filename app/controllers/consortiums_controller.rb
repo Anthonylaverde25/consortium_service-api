@@ -1,5 +1,6 @@
 
 class ConsortiumsController < ApplicationController
+  before_action :authenticate_user!  # Asegura que el usuario esté autenticado
   before_action :set_consortium, only: [ :show, :update, :destroy ]
 
 
