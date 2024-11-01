@@ -5,12 +5,41 @@ class EntityUsecase
     end
 
     def call
-      @entity_repository.get_all_entities
+      entities = @entity_repository.get_all_entities
+
+      entities_with_departments = entities.map do |entity_data|
+        # Crear instancias de DepartmentEntity usando attributes directamente
+        departments = entity_data.departments.map do |department_data|
+          DepartmentEntity.new(department_data)
+        end
+
+
+
+
+        entity_attributes = {
+          id: entity_data.id,
+          name: entity_data.name,
+          description: entity_data.description,
+          email: entity_data.email,
+          consortium_id: entity_data.consortium_id,
+          general_manager_id: entity_data.general_manager_id,
+          departments: departments # Añadir departamentos aquí
+        }
+
+        # Crear instancia de EntityEntity con el hash combinado
+        EntityEntity.new(entity_attributes)
+      end
+
+      entities_with_departments # Retornar la lista de entidades con departamentos
     rescue StandardError => e
       Rails.logger.error("Error finding entities DESDE EL CASO DE USO: #{e.message}")
-    raise
+      raise
     end
   end
+
+
+
+
 
 
   class CreateEntity

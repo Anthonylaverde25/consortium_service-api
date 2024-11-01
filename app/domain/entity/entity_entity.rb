@@ -1,5 +1,5 @@
 class EntityEntity
-  attr_accessor :id, :name, :description, :email, :consortium_id, :general_manager_id # :deleted_at
+  attr_accessor :id, :name, :description, :email, :consortium_id, :general_manager_id, :departments # :deleted_at
 
   def initialize(attributes = {})
     @id = attributes[:id] # El id es nil si no se proporciona
@@ -8,8 +8,23 @@ class EntityEntity
     @email = attributes[:email]
     @consortium_id = attributes[:consortium_id]
     @general_manager_id = attributes[:general_manager_id]
+    @departments = attributes[:departments] || []
+
     # @deleted_at = attributes[:deleted_at]
   end
+
+
+  # def to_entity_attributes(departments)
+  #   {
+  #     id: @id,
+  #     name: @name,
+  #     description: @description,
+  #     email: @email,
+  #     consortium_id: @consortium_id,
+  #     general_manager_id: @general_manager_id,
+  #     departments: departments # Aquí pasamos la lista de departamentos
+  #   }
+  # end
 
 
   # Método para verificar si la entidad es válida

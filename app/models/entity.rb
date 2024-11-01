@@ -21,6 +21,10 @@ class Entity < ApplicationRecord
   validate :ensure_single_general_manager
 
 
+
+
+
+
   private
 
   def ensure_single_general_manager

@@ -4,14 +4,17 @@
 class EntitiesController < ApplicationController
   include ErrorHandler  # Incluye el módulo de manejo de errores
 
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :set_entity, only: %i[show update destroy]
 
   # GET /entities
   def index
     use_case = EntityUsecase::FindAllEntities.new
-    @entities = use_case.call
-    render json: @entities
+      @entities = use_case.call
+
+     # binding.pry
+
+     render json: Presenter::EntityPresenter.as_json(@entities)
   rescue StandardError => e
     Rails.logger.error("Error retrieving all entities (companies) DESDE EL CONTROLADOR: #{e.message}")
     render json: { error: "Internal Server Error" }, status: :internal_server_error

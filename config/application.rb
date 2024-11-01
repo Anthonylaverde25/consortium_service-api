@@ -9,8 +9,8 @@ Bundler.require(*Rails.groups)
 module MyApi
   class Application < Rails::Application
      # Initialize configuration defaults for originally generated Rails version.
-
      # config.load_defaults 7.1
+     ## es importante esta configuracion para poder deshabilitar la autenticacion por sessiones
      config.session_store :cookie_store, key: "_interslice_session"
      config.middleware.use ActionDispatch::Cookies
      config.middleware.use config.session_store, config.session_options
@@ -26,7 +26,7 @@ module MyApi
      ]
 
 
-     # {config.root}/app/controllers/users/registrations_controller
+
 
 
 
