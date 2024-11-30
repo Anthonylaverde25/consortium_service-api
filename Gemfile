@@ -52,7 +52,7 @@ gem "pry"
 gem "pry-rails"
 
 # Sofdeleted
-gem "paranoia", "~> 2.4"
+gem "paranoia", "~> 3.0"
 
 
 gem "image_processing", ">= 1.2"
