@@ -33,7 +33,7 @@ gem "bootsnap", require: false
 # Users authentication
 gem "devise"
 # Token authentication with Devise
-gem "devise_token_auth", "~> 1.2", ">= 1.2.3"
+gem "devise_token_auth", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
